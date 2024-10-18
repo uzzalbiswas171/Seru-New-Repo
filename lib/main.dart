@@ -11,12 +11,13 @@ import 'Controller/homeController.dart';
 import 'Controller/loginController.dart';
 import 'Controller/profile_controller.dart';
 import 'Controller/registrationController.dart';
+import 'View/BootomBar/PackageScreen/ShowPaymentOptionScreen/show_payment_option_screen.dart';
 import 'View/BootomBar/ProfileScreen/ExamResultScreen/IndividualResult/individual_result.dart';
 import 'View/BootomBar/ProfileScreen/VideoClassScreen/video_class_screen.dart';
 import 'View/BootomBar/bootombar.dart';
 import 'View/SplashScreens/main_splash_pageview_screen.dart';
-
-
+import '/payment_configurations.dart' as payment_configurations;
+import 'package:flutter_localizations/flutter_localizations.dart';
 // void main() {
 //   HttpOverrides.global = MyHttpOverrides();
 //   runApp(const MyApp());
@@ -52,13 +53,23 @@ class MyApp extends StatelessWidget {
     child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      localizationsDelegates: [
+        ...GlobalMaterialLocalizations.delegates,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''),
+        Locale('es', ''),
+        Locale('de', ''),
+      ],
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
 
       /// Main Route --------------------------
-   home:SplashScreen3(),
+   home:ShowPaymentOptionScreen(),
+ //  home:SplashScreen3(),
      // home:VdeoClassLst(),
       //   home:IndividualResultScreen(),
       /// Working route -----------------------
