@@ -68,13 +68,14 @@ class MyApp extends StatelessWidget {
       ),
 
       /// Main Route --------------------------
-   home:ShowPaymentOptionScreen(),
- //  home:SplashScreen3(),
+      //  home:ShowPaymentOptionScreen(),
+  home:SplashScreen3(),
      // home:VdeoClassLst(),
       //   home:IndividualResultScreen(),
       /// Working route -----------------------
       // home:BttotomBarScreen(index: 0,),
       ),
     );
+
   }
 }
