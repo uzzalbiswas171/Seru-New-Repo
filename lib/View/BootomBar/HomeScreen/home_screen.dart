@@ -15,6 +15,7 @@ import 'package:seru_test_project/CustomWidget/CustomCompany/costom_company_info
 import 'package:seru_test_project/CustomWidget/CustomImageScetion/custom_image_section.dart';
 import 'package:seru_test_project/CustomWidget/CustomText/custom_text.dart';
 import 'package:seru_test_project/CustomWidget/SelectionOptions/selection_option.dart';
+import 'package:seru_test_project/View/BootomBar/bootombar.dart';
 import 'package:seru_test_project/View/RegistrationForBuyScreen/registration_for_buy_screen.dart';
 import '../../../Controller/buy_package_controller.dart';
 import '../../../custom_const.dart';
@@ -115,7 +116,9 @@ backgroundColor: Colors.white,
                },),
                SizedBox(height: h*0.025,),
                /// Select Options
-               SelectionOptionsScreen(leftText: "Select Your Package",rite_text: "View all",),
+               SelectionOptionsScreen(leftText: "Select Your Package",rite_text: "View all",onTap:() {
+                 Navigator.push(context, MaterialPageRoute(builder: (context) => BttotomBarScreen(index: 1),));
+               }, ),
                SizedBox(height: h*0.010,),
                Consumer<HomeController>(
                  builder: (context, value, child)=>Container(

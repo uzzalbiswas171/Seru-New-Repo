@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seru_test_project/Controller/profile_controller.dart';
+import 'package:seru_test_project/View/BootomBar/ProfileScreen/VideoClassScreen/video_class_screen.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter/services.dart';
 
@@ -71,7 +72,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         appBar: PreferredSize(preferredSize:Size.fromHeight(60), child: CustomAppbar()),
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.arrow_back,size: 30,color: BootomBarColor),
-          onPressed: () => Navigator.pop(context),),
+          onPressed: () => Navigator.push(context,MaterialPageRoute(builder: (context) => VdeoClassLst(),)),),
         body: SingleChildScrollView(
           child: Column(
             children: [

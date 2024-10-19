@@ -4,8 +4,9 @@ import '../../custom_const.dart';
 import '../CustomText/custom_text.dart';
 
 class SelectionOptionsScreen extends StatelessWidget {
- SelectionOptionsScreen({super.key,this.leftText, this.rite_text});
+ SelectionOptionsScreen({super.key,this.leftText, this.rite_text,this.onTap});
   String ? leftText,rite_text;
+    final GestureTapCallback? onTap;
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
@@ -17,22 +18,25 @@ class SelectionOptionsScreen extends StatelessWidget {
           children:  [
 
            CustomText(text: "$leftText", fontSize: 18, fontWeight: FontWeight.w700),
-           Container(
-               height: 30,
-               width: 110,
-
-               decoration: BoxDecoration(borderRadius: BorderRadius.circular(9) ,
-                 color: defaultBackgroundColor,),
-               child: Row(
-                 mainAxisAlignment: MainAxisAlignment.center,
-                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children: [
-                   CustomText(text: "$rite_text", fontSize: 15,
-                       fontWeight: FontWeight.w500,text_color: bootomNavigationbarBackgrountcolor),
-                   SizedBox(width: 6,),
-                   Icon(Icons.arrow_circle_right_outlined,size: 18,color: bootomNavigationbarBackgrountcolor,),
-                 ],
-               )),
+           InkWell(
+            onTap: onTap,
+             child: Container(
+                 height: 30,
+                 width: 110,
+             
+                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(9) ,
+                   color: defaultBackgroundColor,),
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                   children: [
+                     CustomText(text: "$rite_text", fontSize: 15,
+                         fontWeight: FontWeight.w500,text_color: bootomNavigationbarBackgrountcolor),
+                     SizedBox(width: 6,),
+                     Icon(Icons.arrow_circle_right_outlined,size: 18,color: bootomNavigationbarBackgrountcolor,),
+                   ],
+                 )),
+           ),
           ]),
     );
   }

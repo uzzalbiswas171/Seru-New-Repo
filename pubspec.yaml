@@ -91,9 +91,7 @@ flutter:
    - assets/Gif/
    - assets/Icons/
    - assets/PymentImage/
-   - assets/Splash_Screen_banneer/
-   - assets/apple_gpay_asset/applepay.json
-   - assets/apple_gpay_asset/applepay.json/
+   - assets/Splash_Screen_banneer/ 
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

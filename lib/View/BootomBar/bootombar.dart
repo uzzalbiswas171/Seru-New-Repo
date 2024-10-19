@@ -25,7 +25,7 @@ class _BttotomBarScreenState extends State<BttotomBarScreen> {
   int maxCount = 3;
   bool is_get_profie=false;
   dynamic getDynamicSliderData;
-
+ int Select_index =0;
   @override
   void dispose() {
     _pageController.dispose();
@@ -37,7 +37,9 @@ class _BttotomBarScreenState extends State<BttotomBarScreen> {
   /// Controller to handle bottom nav bar and also handles initial page
   var _controller = NotchBottomBarController(index:1);
   @override
-  void initState() { /// Controller to handle PageView and also handles initial page
+  void initState() { 
+    Select_index=widget.index;
+    /// Controller to handle PageView and also handles initial page
     Provider.of<HomeController>(context,listen: false).getAllPackageProvider(context);
     _pageController = PageController(initialPage:widget.index);
 
@@ -59,7 +61,8 @@ class _BttotomBarScreenState extends State<BttotomBarScreen> {
   ];
   final _scaffoldkey=GlobalKey<ScaffoldState>();
 
-  int Select_index=0;
+ 
+  
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
