@@ -80,7 +80,7 @@ flutter:
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
-  # the material Icons class.
+  # the material Icons cla]ss.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
@@ -92,8 +92,7 @@ flutter:
    - assets/Icons/
    - assets/PymentImage/
    - assets/Splash_Screen_banneer/
-   - assets/apple_gpay_asset/applepay.json
-   - assets/apple_gpay_asset/applepay.json/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

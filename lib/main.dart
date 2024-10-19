@@ -1,6 +1,5 @@
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
@@ -11,18 +10,8 @@ import 'Controller/homeController.dart';
 import 'Controller/loginController.dart';
 import 'Controller/profile_controller.dart';
 import 'Controller/registrationController.dart';
-import 'View/BootomBar/PackageScreen/ShowPaymentOptionScreen/show_payment_option_screen.dart';
-import 'View/BootomBar/ProfileScreen/ExamResultScreen/IndividualResult/individual_result.dart';
-import 'View/BootomBar/ProfileScreen/VideoClassScreen/video_class_screen.dart';
-import 'View/BootomBar/bootombar.dart';
-import 'View/SplashScreens/main_splash_pageview_screen.dart';
 import '/payment_configurations.dart' as payment_configurations;
 import 'package:flutter_localizations/flutter_localizations.dart';
-// void main() {
-//   HttpOverrides.global = MyHttpOverrides();
-//   runApp(const MyApp());
-// }
-//
 class MyHttpOverrides extends HttpOverrides{
   @override
   HttpClient createHttpClient(SecurityContext? context){
@@ -76,6 +65,5 @@ class MyApp extends StatelessWidget {
       // home:BttotomBarScreen(index: 0,),
       ),
     );
-
   }
 }
