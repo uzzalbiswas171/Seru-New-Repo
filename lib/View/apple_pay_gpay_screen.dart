@@ -31,12 +31,19 @@ class _ApplePayGooglePayScreenState extends State<ApplePayGooglePayScreen> {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: ListView(
           children:[
-            SizedBox(height: 200,),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                color: Colors.red,
+              ),
+              height: 50,width: double.infinity,),
+            Container(height: 45,width: double.infinity,color: Colors.green,),
+           // SizedBox(height: 200,),
 
             FutureBuilder<PaymentConfiguration>(
               future: _googlePayConfigFuture,
               builder: (context, snapshot) => snapshot.hasData
-                  ? GooglePayButton(
+                  ? GooglePayButton( 
                 paymentConfiguration: snapshot.data!,
                 paymentItems: _paymentItems,
                 type: GooglePayButtonType.buy,
@@ -59,7 +66,12 @@ class _ApplePayGooglePayScreenState extends State<ApplePayGooglePayScreen> {
               loadingIndicator: const Center(
                 child: CircularProgressIndicator(),
               ),
-            ),]
+            ),
+            
+            
+            
+            ]
+      
       ),
     ),);
   }

@@ -34,7 +34,9 @@ class _ShowPaymentOptionScreenState extends State<ShowPaymentOptionScreen> {
         height: double.infinity,
         width: double.infinity,
         child: ListView(
-            children:[ FutureBuilder<PaymentConfiguration>(
+            children:[ 
+            
+              FutureBuilder<PaymentConfiguration>(
                 future: _googlePayConfigFuture,
                 builder: (context, snapshot) => snapshot.hasData
                     ? GooglePayButton(
