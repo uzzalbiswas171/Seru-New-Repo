@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Controller/homeController.dart';
@@ -9,7 +10,11 @@ import '../../../CustomWidget/CustomText/custom_text.dart';
 import '../../../custom_const.dart';
 import '../../Auth/Login/screens/login_screen.dart';
 import '../../RegistrationForBuyScreen/registration_for_buy_screen.dart';
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '/payment_configurations.dart' as payment_configurations;
 class PackageScreen extends StatefulWidget {
   const PackageScreen({Key? key}) : super(key: key);
 
@@ -18,6 +23,25 @@ class PackageScreen extends StatefulWidget {
 }
 
 class _PackageScreenState extends State<PackageScreen> {
+  TextEditingController _applyCuponController = TextEditingController();
+  late final Future<PaymentConfiguration> _googlePayConfigFuture;
+
+  @override
+  void initState() {
+    Provider.of<HomeController>(context, listen: false)
+        .getAllPackageProvider(context);
+    super.initState();
+    _googlePayConfigFuture = PaymentConfiguration.fromAsset('gpay.json');
+  }
+
+  void onGooglePayResult(paymentResult) {
+    debugPrint(paymentResult.toString());
+  }
+
+  void onApplePayResult(paymentResult) {
+    debugPrint(paymentResult.toString());
+  }
+
   bool  is_cliced=false;
   String  is_cliced_for_own="1";
   @override
@@ -84,116 +108,207 @@ class _PackageScreenState extends State<PackageScreen> {
                            return StatefulBuilder(
                              builder: (context, setState) {
                                return AlertDialog(
-                                 title: CustomText(text: "For who do you want to buy ?..", fontSize: 18, fontWeight: FontWeight.w600),
+                                 title: CustomText(
+                                     text:
+                                     "For who do you want to buy ?..",
+                                     fontSize: 18,
+                                     fontWeight:
+                                     FontWeight.w600),
                                  content: Container(
-                                   height: is_cliced==true?265:60,
-                                   child: Column(
-                                     children: [
-                                       Container(
-                                         height: 60,
-                                         width: MediaQuery.of(context).size.width*0.85,
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                           children: [
-                                             ElevatedButton( style: ElevatedButton.styleFrom(
-                                                 backgroundColor:is_cliced_for_own=="FOR GIFT"? BootomBarColor :Colors.white
-                                             ),
-                                                 onPressed: () {
-
-                                                   setState(() {
-                                                     is_cliced_for_own="FOR GIFT";
-                                                     is_cliced=true;
-                                                   },);
-                                                 }, child: CustomText(text: "FOR GIFT", fontSize:h<700?10: 12, fontWeight: FontWeight.w500)),
-                                             ElevatedButton(
-                                                 style: ElevatedButton.styleFrom(
-                                                     backgroundColor:is_cliced_for_own=="FOR OWN"? BootomBarColor:Colors.white
-                                                 ),
-                                                 onPressed: () {
-                                                   setState(() {
-                                                     is_cliced_for_own="FOR OWN";
-                                                     is_cliced=true;
-                                                   },);
-                                                 }, child: CustomText(text: "FOR OWN", fontSize:h<700?10: 12, fontWeight: FontWeight.w500)),
-                                           ],
-                                         ),
-                                       ),
-
-                                       is_cliced==false?Container():
-                                       SizedBox(height: 20,),
-                                       is_cliced==false?Container():
-                                       GestureDetector(
-                                         onTap: () {
-                                           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegistrationForBuyScreen(
-                                             package_id: "${value.getAllPackageList[index]["subscription_structure_id"]??"0"}",
-                                             subscription_structure_id:"${value.getAllPackageList[index]["subscription_structure_id"]??"0"}" ,
-                                             is_cliced_for_own: is_cliced_for_own,
-                                           ),));
-                                         },
-                                         child: Container(
+                                   height: is_cliced == true
+                                       ? 400
+                                       : 60,
+                                   child: SingleChildScrollView(
+                                     child: Column(
+                                       children: [
+                                         Container(
+                                           padding: EdgeInsets.only(left: 10,right: 10),
                                            height: 60,
-                                           width: MediaQuery.of(context).size.width*0.8,
+                                           width: MediaQuery.of(
+                                               context)
+                                               .size
+                                               .width *
+                                               0.85,
                                            child: Row(
-                                             mainAxisAlignment: MainAxisAlignment.center,
+                                             mainAxisAlignment:
+                                             MainAxisAlignment
+                                                 .spaceBetween,
                                              children: [
-                                               CustomImageSection(image:AssetImage("assets/PymentImage/mastercad.PNG"), img_height: 90, img_width: 80, img_margin: 10, Img_radius: 11),
+                                               ElevatedButton(
+                                                   style: ElevatedButton.styleFrom(
+                                                       backgroundColor: is_cliced_for_own ==
+                                                           "FOR GIFT"
+                                                           ? BootomBarColor
+                                                           : Colors
+                                                           .white),
+                                                   onPressed:
+                                                       () {
+                                                     setState(
+                                                           () {
+                                                         is_cliced_for_own =
+                                                         "FOR GIFT";
+                                                         is_cliced =
+                                                         true;
+                                                       },
+                                                     );
+                                                   },
+                                                   child: CustomText(
+                                                       text:
+                                                       "FOR GIFT",
+                                                       fontSize: h <
+                                                           700
+                                                           ? 10
+                                                           : 12,
+                                                       fontWeight:
+                                                       FontWeight.w500)),
+                                               ElevatedButton(
+                                                   style: ElevatedButton.styleFrom(
+                                                       backgroundColor: is_cliced_for_own ==
+                                                           "FOR OWN"
+                                                           ? BootomBarColor
+                                                           : Colors
+                                                           .white),
+                                                   onPressed:
+                                                       () {
+                                                     setState(
+                                                           () {
+                                                         is_cliced_for_own =
+                                                         "FOR OWN";
+                                                         is_cliced =
+                                                         true;
+                                                       },
+                                                     );
+                                                   },
+                                                   child: CustomText(
+                                                       text:
+                                                       "FOR OWN",
+                                                       fontSize: h <
+                                                           700
+                                                           ? 10
+                                                           : 12,
+                                                       fontWeight:
+                                                       FontWeight.w500)),
                                              ],
                                            ),
                                          ),
-                                       ),
-                                       is_cliced==false?Container():  Container(
-                                         height: 60,
-                                         width: MediaQuery.of(context).size.width*0.8,
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                           children: [
-
-                                             GestureDetector(
-                                                 onTap: () {
-                                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegistrationForBuyScreen(
-                                                     package_id: "${value.getAllPackageList[index]["subscription_structure_id"]??"0"}",
-                                                     subscription_structure_id:"${value.getAllPackageList[index]["subscription_structure_id"]??"0"}" ,
-                                                      is_cliced_for_own: is_cliced_for_own,
-                                                   ),));
-                                               },
-                                                 child: CustomImageSection(image:AssetImage("assets/PymentImage/payple.PNG"), img_height: 90, img_width: 80, img_margin: 0, Img_radius: 11)),
-                                             CircleAvatar(
-                                               radius: 30,
-                                               backgroundColor: BootomBarColor.withOpacity(0.3),
-                                               child: Text("??",style: TextStyle(
-                                                 fontSize: 33,
-                                               ),),
-                                             ),
-                                             GestureDetector(
-                                                 onTap: () {
-                                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegistrationForBuyScreen(
-                                                     package_id: "${value.getAllPackageList[index]["subscription_structure_id"]??"0"}",
-                                                     subscription_structure_id:"${value.getAllPackageList[index]["subscription_structure_id"]??"0"}" ,
-                                                      is_cliced_for_own: is_cliced_for_own,
-                                                   ),));
-                                                   },child: CustomImageSection(image:AssetImage("assets/PymentImage/gpay.PNG"), img_height: 90, img_width: 80, img_margin: 0, Img_radius: 11)),
-
-                                           ],
+                                         is_cliced == false
+                                             ? Container()
+                                             : SizedBox(
+                                           height: 20,
                                          ),
-                                       ),
-                                       is_cliced==false?Container():  Container(
-                                         height: 60,
-                                         width: MediaQuery.of(context).size.width*0.8,
-                                         child: Row(
-                                           mainAxisAlignment: MainAxisAlignment.center,
-                                           children: [
-                                             GestureDetector(
-                                                 onTap: () {
-                                                   Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationForBuyScreen(
-                                                     package_id: "${value.getAllPackageList[index]["subscription_structure_id"]??"0"}",
-                                                     subscription_structure_id:"${value.getAllPackageList[index]["subscription_structure_id"]??"0"}" ,
-                                                      is_cliced_for_own: is_cliced_for_own,
-                                                   ),));
-                                                   },child: CustomImageSection(image:AssetImage("assets/PymentImage/mastercad.PNG"), img_height: 90, img_width: 80, img_margin: 10, Img_radius: 11)),
-                                           ],
+                                         is_cliced == false
+                                             ? Container()
+                                             : Container(
+                                           height: 60,
+                                           width: MediaQuery.of(
+                                               context)
+                                               .size
+                                               .width *
+                                               0.8,
+                                           child: Row(
+                                             mainAxisAlignment:
+                                             MainAxisAlignment
+                                                 .center,
+                                             children: [
+                                               GestureDetector(
+                                                   onTap:
+                                                       () {
+                                                     Navigator.push(
+                                                         context,
+                                                         MaterialPageRoute(
+                                                           builder: (context) => RegistrationForBuyScreen(
+                                                             package_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
+                                                             subscription_structure_id: "${value.getAllPackageList[index]["subscription_structures"][0]["subscription_structure_id"] ?? "0"}",
+                                                             is_cliced_for_own: is_cliced_for_own,
+                                                           ),
+                                                         ));
+                                                   },
+                                                   child:
+                                                   Container(
+                                                     height:
+                                                     47,
+                                                     width:
+                                                     235,
+                                                     decoration:
+                                                     BoxDecoration(
+                                                       borderRadius: BorderRadius.circular(40),
+                                                       color: Colors.black,
+                                                     ),
+                                                     padding:
+                                                     EdgeInsets.only(left: 30, right: 20),
+                                                     child:
+                                                     Row(
+                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                       children: [
+                                                         Text(
+                                                           "Buy with ",
+                                                           style: GoogleFonts.roboto(letterSpacing: 0.3, fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.95)),
+                                                         ),
+                                                         CustomImageSection(image: AssetImage("assets/PymentImage/mastercad.PNG"), img_height: 90, img_width: 50, img_margin: 10, Img_radius: 11),
+                                                       ],
+                                                     ),
+                                                   )),
+                                             ],
+                                           ),
                                          ),
-                                       ),
-                                     ],
+                                         FutureBuilder<
+                                             PaymentConfiguration>(
+                                             future:
+                                             _googlePayConfigFuture,
+                                             builder: (context,
+                                                 snapshot) =>
+                                             snapshot
+                                                 .hasData
+                                                 ? GooglePayButton(
+                                               width:
+                                               235,
+                                               paymentConfiguration:
+                                               snapshot.data!,
+                                               paymentItems:
+                                               _paymentItems,
+                                               type:
+                                               GooglePayButtonType.buy,
+                                               margin: const EdgeInsets
+                                                   .only(
+                                                   top: 15.0),
+                                               onPaymentResult:
+                                               onGooglePayResult,
+                                               loadingIndicator:
+                                               const Center(
+                                                 child:
+                                                 CircularProgressIndicator(),
+                                               ),
+                                             )
+                                                 : const SizedBox
+                                                 .shrink()),
+                                         ApplePayButton(
+                                           paymentConfiguration:
+                                           PaymentConfiguration
+                                               .fromJsonString(
+                                               payment_configurations
+                                                   .defaultApplePay),
+                                           paymentItems:
+                                           _paymentItems,
+                                           style:
+                                           ApplePayButtonStyle
+                                               .black,
+                                           type:
+                                           ApplePayButtonType
+                                               .buy,
+                                           margin:
+                                           const EdgeInsets
+                                               .only(
+                                               top: 15.0),
+                                           onPaymentResult:
+                                           onApplePayResult,
+                                           loadingIndicator:
+                                           const Center(
+                                             child:
+                                             CircularProgressIndicator(),
+                                           ),
+                                         ),
+                                       ],
+                                     ),
                                    ),
                                  ),
                                );
@@ -236,3 +351,10 @@ class _PackageScreenState extends State<PackageScreen> {
     );
   }
 }
+const _paymentItems = [
+  PaymentItem(
+    label: 'Total',
+    amount: '.09',
+    status: PaymentItemStatus.final_price,
+  )
+];

@@ -47,6 +47,7 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
   Widget build(BuildContext context) {
     double h=MediaQuery.of(context).size.height;
     double w=MediaQuery.of(context).size.width;
+    print("subscriptionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ---id-------------------- ${widget.subscription_structure_id}");
     return Scaffold(
       appBar: PreferredSize(preferredSize:Size.fromHeight(75), child: CustomAppbar()),
       body: Container(

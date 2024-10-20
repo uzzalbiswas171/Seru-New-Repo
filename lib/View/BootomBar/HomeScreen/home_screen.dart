@@ -23,6 +23,7 @@ import '../../../Controller/buy_package_controller.dart';
 import '../../../custom_const.dart';
 import '../../Auth/Login/screens/login_screen.dart';
 import '/payment_configurations.dart' as payment_configurations;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -36,7 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-     Provider.of<HomeController>(context,listen: false).getAllPackageProvider(context);
+    Provider.of<HomeController>(context, listen: false)
+        .getAllPackageProvider(context);
     super.initState();
     _googlePayConfigFuture = PaymentConfiguration.fromAsset('gpay.json');
   }
@@ -55,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "assets/SeruTestBanner/seru_banner.jpg",
   ];
 
-  bool is_cliced = true;
+  bool is_cliced = false;
   String is_cliced_for_own = "1";
   List getAllActivePackageList = [];
 
@@ -253,164 +255,197 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       height: is_cliced == true
                                                           ? 400
                                                           : 60,
-                                                      child: Column(
-                                                        children: [
-                                                          Container(
-                                                            height: 60,
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                0.85,
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                ElevatedButton(
-                                                                    style: ElevatedButton.styleFrom(
-                                                                        backgroundColor: is_cliced_for_own ==
-                                                                                "FOR GIFT"
-                                                                            ? BootomBarColor
-                                                                            : Colors
-                                                                                .white),
-                                                                    onPressed:
-                                                                        () {
-                                                                      setState(
-                                                                        () {
-                                                                          is_cliced_for_own =
-                                                                              "FOR GIFT";
-                                                                          is_cliced =
-                                                                              true;
-                                                                        },
-                                                                      );
-                                                                    },
-                                                                    child: CustomText(
-                                                                        text:
-                                                                            "FOR GIFT",
-                                                                        fontSize: h <
-                                                                                700
-                                                                            ? 10
-                                                                            : 12,
-                                                                        fontWeight:
-                                                                            FontWeight.w500)),
-                                                                ElevatedButton(
-                                                                    style: ElevatedButton.styleFrom(
-                                                                        backgroundColor: is_cliced_for_own ==
-                                                                                "FOR OWN"
-                                                                            ? BootomBarColor
-                                                                            : Colors
-                                                                                .white),
-                                                                    onPressed:
-                                                                        () {
-                                                                      setState(
-                                                                        () {
-                                                                          is_cliced_for_own =
-                                                                              "FOR OWN";
-                                                                          is_cliced =
-                                                                              true;
-                                                                        },
-                                                                      );
-                                                                    },
-                                                                    child: CustomText(
-                                                                        text:
-                                                                            "FOR OWN",
-                                                                        fontSize: h <
-                                                                                700
-                                                                            ? 10
-                                                                            : 12,
-                                                                        fontWeight:
-                                                                            FontWeight.w500)),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          is_cliced == false
-                                                              ? Container()
-                                                              : SizedBox(
-                                                                  height: 20,
-                                                                ),
-                                                        
-                                                          is_cliced == false
-                                                              ? Container()
-                                                              : Container(
-                                                                  height: 60,
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.8,
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      GestureDetector(
-                                                                          onTap:
-                                                                              () {
-                                                                            Navigator.push(
-                                                                                context,
-                                                                                MaterialPageRoute(
-                                                                                  builder: (context) => RegistrationForBuyScreen(
-                                                                                    package_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                                    subscription_structure_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                                    is_cliced_for_own: is_cliced_for_own,
-                                                                                  ),
-                                                                                ));
+                                                      child: SingleChildScrollView(
+                                                        child: Column(
+                                                          children: [
+                                                            Container(
+                                                              padding: EdgeInsets.only(left: 10,right: 10),
+                                                              height: 60,
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.85,
+                                                              child: Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  ElevatedButton(
+                                                                      style: ElevatedButton.styleFrom(
+                                                                          backgroundColor: is_cliced_for_own ==
+                                                                                  "FOR GIFT"
+                                                                              ? BootomBarColor
+                                                                              : Colors
+                                                                                  .white),
+                                                                      onPressed:
+                                                                          () {
+                                                                        setState(
+                                                                          () {
+                                                                            is_cliced_for_own =
+                                                                                "FOR GIFT";
+                                                                            is_cliced =
+                                                                                true;
                                                                           },
-                                                                          child: Container(
-                                                                            height: 47,
-                                                                            width: 210,
-                                                                            decoration: BoxDecoration(
-                                                                              borderRadius: BorderRadius.circular(40),
-                                                                            color: Colors.black,
-                                                                            ),
-                                                                            padding: EdgeInsets.only(left: 30,right: 20),
-                                                                            child: Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                              children: [
-                                                                                 Text("Buy with ",style: GoogleFonts.roboto(letterSpacing: 0.3,fontSize: 20,
-                                                                                 fontWeight: FontWeight.w600,color: Colors.white.withOpacity(0.95)),),
-                                                                                CustomImageSection(
-                                                                                    image: AssetImage("assets/PymentImage/mastercad.PNG"),
-                                                                                    img_height: 90,
-                                                                                    img_width: 50,
-                                                                                    img_margin: 10,
-                                                                                    Img_radius: 11),
-                                                                              ],
-                                                                            ),
-                                                                          )),
-                                                                    ],
+                                                                        );
+                                                                      },
+                                                                      child: CustomText(
+                                                                          text:
+                                                                              "FOR GIFT",
+                                                                          fontSize: h <
+                                                                                  700
+                                                                              ? 10
+                                                                              : 12,
+                                                                          fontWeight:
+                                                                              FontWeight.w500)),
+                                                                  ElevatedButton(
+                                                                      style: ElevatedButton.styleFrom(
+                                                                          backgroundColor: is_cliced_for_own ==
+                                                                                  "FOR OWN"
+                                                                              ? BootomBarColor
+                                                                              : Colors
+                                                                                  .white),
+                                                                      onPressed:
+                                                                          () {
+                                                                        setState(
+                                                                          () {
+                                                                            is_cliced_for_own =
+                                                                                "FOR OWN";
+                                                                            is_cliced =
+                                                                                true;
+                                                                          },
+                                                                        );
+                                                                      },
+                                                                      child: CustomText(
+                                                                          text:
+                                                                              "FOR OWN",
+                                                                          fontSize: h <
+                                                                                  700
+                                                                              ? 10
+                                                                              : 12,
+                                                                          fontWeight:
+                                                                              FontWeight.w500)),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            is_cliced == false
+                                                                ? Container()
+                                                                : SizedBox(
+                                                                    height: 20,
                                                                   ),
-                                                                ),
-                                                                  FutureBuilder<PaymentConfiguration>(
-                                                                    future: _googlePayConfigFuture,
-                                                                    builder: (context, snapshot) => snapshot.hasData
-                                                                        ? GooglePayButton( 
-                                                                          width: 210,
-                                                                      paymentConfiguration: snapshot.data!,
-                                                                      paymentItems: _paymentItems,
-                                                                      type: GooglePayButtonType.buy,
-                                                                      margin: const EdgeInsets.only(top: 15.0),
-                                                                      onPaymentResult: onGooglePayResult,
-                                                                      loadingIndicator: const Center(
-                                                                        child: CircularProgressIndicator(),
-                                                                      ),
-                                                                    )
-                                                                        : const SizedBox.shrink()),
-
-                                                                  ApplePayButton(
-                                                                    paymentConfiguration: PaymentConfiguration.fromJsonString(
-                                                                        payment_configurations.defaultApplePay),
-                                                                    paymentItems: _paymentItems,
-                                                                    style: ApplePayButtonStyle.black,
-                                                                    type: ApplePayButtonType.buy,
-                                                                    margin: const EdgeInsets.only(top: 15.0),
-                                                                    onPaymentResult: onApplePayResult,
-                                                                    loadingIndicator: const Center(
-                                                                      child: CircularProgressIndicator(),
+                                                            is_cliced == false
+                                                                ? Container()
+                                                                : Container(
+                                                                    height: 60,
+                                                                    width: MediaQuery.of(
+                                                                                context)
+                                                                            .size
+                                                                            .width *
+                                                                        0.8,
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              Navigator.push(
+                                                                                  context,
+                                                                                  MaterialPageRoute(
+                                                                                    builder: (context) => RegistrationForBuyScreen(
+                                                                                      package_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
+                                                                                      subscription_structure_id: "${value.getAllPackageList[index]["subscription_structures"][0]["subscription_structure_id"] ?? "0"}",
+                                                                                      is_cliced_for_own: is_cliced_for_own,
+                                                                                    ),
+                                                                                  ));
+                                                                            },
+                                                                            child:
+                                                                                Container(
+                                                                              height:
+                                                                                  47,
+                                                                              width:
+                                                                                  235,
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                borderRadius: BorderRadius.circular(40),
+                                                                                color: Colors.black,
+                                                                              ),
+                                                                              padding:
+                                                                                  EdgeInsets.only(left: 30, right: 20),
+                                                                              child:
+                                                                                  Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "Buy with ",
+                                                                                    style: GoogleFonts.roboto(letterSpacing: 0.3, fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.95)),
+                                                                                  ),
+                                                                                  CustomImageSection(image: AssetImage("assets/PymentImage/mastercad.PNG"), img_height: 90, img_width: 50, img_margin: 10, Img_radius: 11),
+                                                                                ],
+                                                                              ),
+                                                                            )),
+                                                                      ],
                                                                     ),
                                                                   ),
-                                                        ],
+                                                            FutureBuilder<
+                                                                    PaymentConfiguration>(
+                                                                future:
+                                                                    _googlePayConfigFuture,
+                                                                builder: (context,
+                                                                        snapshot) =>
+                                                                    snapshot
+                                                                            .hasData
+                                                                        ? GooglePayButton(
+                                                                            width:
+                                                                                235,
+                                                                            paymentConfiguration:
+                                                                                snapshot.data!,
+                                                                            paymentItems:
+                                                                                _paymentItems,
+                                                                            type:
+                                                                                GooglePayButtonType.buy,
+                                                                            margin: const EdgeInsets
+                                                                                .only(
+                                                                                top: 15.0),
+                                                                            onPaymentResult:
+                                                                                onGooglePayResult,
+                                                                            loadingIndicator:
+                                                                                const Center(
+                                                                              child:
+                                                                                  CircularProgressIndicator(),
+                                                                            ),
+                                                                          )
+                                                                        : const SizedBox
+                                                                            .shrink()),
+                                                            ApplePayButton(
+                                                              paymentConfiguration:
+                                                                  PaymentConfiguration
+                                                                      .fromJsonString(
+                                                                          payment_configurations
+                                                                              .defaultApplePay),
+                                                              paymentItems:
+                                                                  _paymentItems,
+                                                              style:
+                                                                  ApplePayButtonStyle
+                                                                      .black,
+                                                              type:
+                                                                  ApplePayButtonType
+                                                                      .buy,
+                                                              margin:
+                                                                  const EdgeInsets
+                                                                      .only(
+                                                                      top: 15.0),
+                                                              onPaymentResult:
+                                                                  onApplePayResult,
+                                                              loadingIndicator:
+                                                                  const Center(
+                                                                child:
+                                                                    CircularProgressIndicator(),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   );
