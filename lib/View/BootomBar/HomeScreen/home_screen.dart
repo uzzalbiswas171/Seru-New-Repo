@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+     Provider.of<HomeController>(context,listen: false).getAllPackageProvider(context);
     super.initState();
     _googlePayConfigFuture = PaymentConfiguration.fromAsset('gpay.json');
   }
@@ -201,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       alignment: Alignment.center,
                                       child: CustomText(
                                           text:
-                                              "\£ ${value.getAllPackageList[index]["amount"] ?? 0}",
+                                              "\£ ${value.getAllPackageList[index]["amount"] ?? value.getAllPackageList[index]["price"]}",
                                           text_color: main_text_white_color,
                                           fontSize: 17,
                                           fontWeight: FontWeight.w500),
@@ -249,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             FontWeight.w600),
                                                     content: Container(
                                                       height: is_cliced == true
-                                                          ? 265
+                                                          ? 400
                                                           : 60,
                                                       child: Column(
                                                         children: [
@@ -327,128 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               : SizedBox(
                                                                   height: 20,
                                                                 ),
-                                                          is_cliced == false
-                                                              ? Container()
-                                                              : GestureDetector(
-                                                                  onTap: () {
-                                                                    Navigator.pushReplacement(
-                                                                        context,
-                                                                        MaterialPageRoute(
-                                                                          builder: (context) =>
-                                                                              RegistrationForBuyScreen(
-                                                                            package_id:
-                                                                                "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                            subscription_structure_id:
-                                                                                "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                            is_cliced_for_own:
-                                                                                is_cliced_for_own,
-                                                                          ),
-                                                                        ));
-                                                                  },
-                                                                  child:
-                                                                      Container(
-                                                                    height: 60,
-                                                                    width: MediaQuery.of(context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.8,
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        CustomImageSection(
-                                                                            image: AssetImage(
-                                                                                "assets/PymentImage/mastercad.PNG"),
-                                                                            img_height:
-                                                                                90,
-                                                                            img_width:
-                                                                                80,
-                                                                            img_margin:
-                                                                                10,
-                                                                            Img_radius:
-                                                                                11),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                          is_cliced == false
-                                                              ? Container()
-                                                              : Container(
-                                                                  height: 60,
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width *
-                                                                      0.8,
-                                                                  child: Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceBetween,
-                                                                    children: [
-                                                                      GestureDetector(
-                                                                          onTap:
-                                                                              () {
-                                                                            Navigator.pushReplacement(
-                                                                                context,
-                                                                                MaterialPageRoute(
-                                                                                  builder: (context) => RegistrationForBuyScreen(
-                                                                                    package_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                                    subscription_structure_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                                    is_cliced_for_own: is_cliced_for_own,
-                                                                                  ),
-                                                                                ));
-                                                                          },
-                                                                          child: CustomImageSection(
-                                                                              image: AssetImage("assets/PymentImage/payple.PNG"),
-                                                                              img_height: 90,
-                                                                              img_width: 80,
-                                                                              img_margin: 0,
-                                                                              Img_radius: 11)),
-                                                                      CircleAvatar(
-                                                                        radius:
-                                                                            30,
-                                                                        backgroundColor:
-                                                                            BootomBarColor.withOpacity(0.3),
-                                                                        child:
-                                                                            Text(
-                                                                          "??",
-                                                                          style:
-                                                                              TextStyle(
-                                                                            fontSize:
-                                                                                33,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                      GestureDetector(
-                                                                          onTap:
-                                                                              () {
-                                                                            Navigator.pushReplacement(
-                                                                                context,
-                                                                                MaterialPageRoute(
-                                                                                  builder: (context) => RegistrationForBuyScreen(
-                                                                                    package_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                                    subscription_structure_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                                    is_cliced_for_own: is_cliced_for_own,
-                                                                                  ),
-                                                                                ));
-                                                                          },
-                                                                          child:
-                                                                          InkWell(
-                                                                            onTap: (){
-                                                                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ApplePayGooglePayScreen()));
-                                                                            },
-                                                                            child: CustomImageSection(
-                                                                                image: AssetImage("assets/PymentImage/gpay.PNG"),
-                                                                                img_height: 90,
-                                                                                img_width: 80,
-                                                                                img_margin: 0,
-                                                                                Img_radius: 11),
-                                                                          )
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
+                                                        
                                                           is_cliced == false
                                                               ? Container()
                                                               : Container(
@@ -476,15 +357,59 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                                   ),
                                                                                 ));
                                                                           },
-                                                                          child: CustomImageSection(
-                                                                              image: AssetImage("assets/PymentImage/mastercad.PNG"),
-                                                                              img_height: 90,
-                                                                              img_width: 80,
-                                                                              img_margin: 10,
-                                                                              Img_radius: 11)),
+                                                                          child: Container(
+                                                                            height: 47,
+                                                                            width: 210,
+                                                                            decoration: BoxDecoration(
+                                                                              borderRadius: BorderRadius.circular(40),
+                                                                            color: Colors.black,
+                                                                            ),
+                                                                            padding: EdgeInsets.only(left: 30,right: 20),
+                                                                            child: Row(
+                                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                              children: [
+                                                                                 Text("Buy with ",style: GoogleFonts.roboto(letterSpacing: 0.3,fontSize: 20,
+                                                                                 fontWeight: FontWeight.w600,color: Colors.white.withOpacity(0.95)),),
+                                                                                CustomImageSection(
+                                                                                    image: AssetImage("assets/PymentImage/mastercad.PNG"),
+                                                                                    img_height: 90,
+                                                                                    img_width: 50,
+                                                                                    img_margin: 10,
+                                                                                    Img_radius: 11),
+                                                                              ],
+                                                                            ),
+                                                                          )),
                                                                     ],
                                                                   ),
                                                                 ),
+                                                                  FutureBuilder<PaymentConfiguration>(
+                                                                    future: _googlePayConfigFuture,
+                                                                    builder: (context, snapshot) => snapshot.hasData
+                                                                        ? GooglePayButton( 
+                                                                          width: 210,
+                                                                      paymentConfiguration: snapshot.data!,
+                                                                      paymentItems: _paymentItems,
+                                                                      type: GooglePayButtonType.buy,
+                                                                      margin: const EdgeInsets.only(top: 15.0),
+                                                                      onPaymentResult: onGooglePayResult,
+                                                                      loadingIndicator: const Center(
+                                                                        child: CircularProgressIndicator(),
+                                                                      ),
+                                                                    )
+                                                                        : const SizedBox.shrink()),
+
+                                                                  ApplePayButton(
+                                                                    paymentConfiguration: PaymentConfiguration.fromJsonString(
+                                                                        payment_configurations.defaultApplePay),
+                                                                    paymentItems: _paymentItems,
+                                                                    style: ApplePayButtonStyle.black,
+                                                                    type: ApplePayButtonType.buy,
+                                                                    margin: const EdgeInsets.only(top: 15.0),
+                                                                    onPaymentResult: onApplePayResult,
+                                                                    loadingIndicator: const Center(
+                                                                      child: CircularProgressIndicator(),
+                                                                    ),
+                                                                  ),
                                                         ],
                                                       ),
                                                     ),
