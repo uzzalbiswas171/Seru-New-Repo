@@ -104,12 +104,12 @@ class CustomHttp{
     try{
       Response response=await http.get(Uri.parse(url), );
       final data=jsonDecode(response.body);
-      for(int i=0;i<data["data"].length;i++){
-        if("${data["data"][i]["active_status"]}" == "Active"){
-          getAllPackageList.add(data["data"][i]);
-        }
-      }
-
+      // for(int i=0;i<data["data"].length;i++){
+      //   if("${data["data"][i]["active_status"]}" == "Active"){
+      //     getAllPackageList.add(data["data"][i]);
+      //   }
+      // }
+    getAllPackageList=data["data"];
 
     }catch(e){
       print("getAllPackageFunction catch error-----------------------------------------> $e");

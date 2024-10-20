@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+     Provider.of<HomeController>(context,listen: false).getAllPackageProvider(context);
     super.initState();
     _googlePayConfigFuture = PaymentConfiguration.fromAsset('gpay.json');
   }
@@ -202,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       alignment: Alignment.center,
                                       child: CustomText(
                                           text:
-                                              "\£ ${value.getAllPackageList[index]["amount"] ?? 0}",
+                                              "\£ ${value.getAllPackageList[index]["amount"] ?? value.getAllPackageList[index]["price"]}",
                                           text_color: main_text_white_color,
                                           fontSize: 17,
                                           fontWeight: FontWeight.w500),

@@ -31,7 +31,7 @@
 
  ///---------------------------------------------------------Home Screen Part------------------------------
 /// GET ALL PACKAGE
-String GETALLPACKAGRE ="api/subscriptions";
+String GETALLPACKAGRE ="api/packages";
 
 
 /// MOCK TEST

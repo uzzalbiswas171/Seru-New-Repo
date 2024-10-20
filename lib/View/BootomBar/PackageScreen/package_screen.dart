@@ -63,7 +63,7 @@ class _PackageScreenState extends State<PackageScreen> {
                                        gradient: customBackground()
                                    ),
                                    alignment: Alignment.center,
-                                   child: CustomText(text: "\£ ${value.getAllPackageList[index]["amount"]??0}",text_color: main_text_white_color ,fontSize: 17, fontWeight: FontWeight.w500),
+                                   child: CustomText(text: "\£ ${value.getAllPackageList[index]["price"]??value.getAllPackageList[index]["price"]}",text_color: main_text_white_color ,fontSize: 17, fontWeight: FontWeight.w500),
                                  ),
                                ],
                              ),
