@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:seru_test_project/Controller/buy_package_controller.dart';
 import 'package:seru_test_project/View/SplashScreens/splash_screen3.dart';
+import 'package:seru_test_project/testmcq.dart';
 import 'Controller/answerSubmitController.dart';
 import 'Controller/homeController.dart';
 import 'Controller/loginController.dart';
@@ -69,13 +70,13 @@ class MyApp extends StatelessWidget {
 
       /// Main Route --------------------------
       //  home:ShowPaymentOptionScreen(),
-  home:SplashScreen3(),
+//  home:SplashScreen3(),
+  home:FillInTheBlanksWidget(),
      // home:VdeoClassLst(),
       //   home:IndividualResultScreen(),
       /// Working route -----------------------
       // home:BttotomBarScreen(index: 0,),
       ),
     );
-
   }
 }
