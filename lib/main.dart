@@ -70,8 +70,8 @@ class MyApp extends StatelessWidget {
 
       /// Main Route --------------------------
       //  home:ShowPaymentOptionScreen(),
-//  home:SplashScreen3(),
-  home:FillInTheBlanksWidget(),
+  home:SplashScreen3(),
+      // home:FillInTheBlanksWidget(),
      // home:VdeoClassLst(),
       //   home:IndividualResultScreen(),
       /// Working route -----------------------
