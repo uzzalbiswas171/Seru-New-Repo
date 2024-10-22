@@ -39,7 +39,8 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
  TextEditingController _friendemailController = TextEditingController() ;
    @override
   void initState() {
-     _countryController.text="London";
+     _cityController.text="London";
+     _countryController.text="UK";
      // TODO: implement initState
     super.initState();
   }
@@ -114,7 +115,7 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
                     CustomTExtFromField(controller: _address2Controller, hintText: "Address Line 2", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
           
                     SizedBox(height: 15,),
-                    CustomTExtFromField(controller: _cityController, hintText: "City*", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
+                    CustomTExtFromFieldforreadonly(readOnly: true,controller: _cityController, hintText: "City*", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
           
                     SizedBox(height: 15,),
                     CustomTExtFromFieldforreadonly( readOnly: true,controller: _countryController, hintText: "Country*", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
@@ -126,7 +127,33 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
                     CustomTExtFromField(controller: _emailController, hintText: "Email*", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
                     SizedBox(height: 15,),
                     CustomButton(onTap: () {
-                      Provider.of<BuyPackageController>(context,listen: false).buyPackageWithoutVoucherProvider(
+                      if(_nameController.text==""){
+                       quickAlertWrong(context, "Enter Name", "Try again later", 1);
+                      }else{
+                        if(_surnameController.text==""){
+                       quickAlertWrong(context, "Enter Surname Name", "Try again later", 1);
+                      }else{  
+                          if(_address1Controller.text==""){
+                       quickAlertWrong(context, "Enter Address", "Try again later", 1);
+                      }else{
+                      if(_address2Controller.text==""){
+                       quickAlertWrong(context, "Enter Address Line 2", "Try again later", 1);
+                        }
+                        else{
+                          if(_cityController.text==""){
+                       quickAlertWrong(context, "Enter City", "Try again later", 1);
+                           }
+                           else{
+                            if(_countryController.text==""){
+                       quickAlertWrong(context, "Enter Country", "Try again later", 1);
+                             }else{
+                              if(_zipController.text==""){
+                       quickAlertWrong(context, "Enter Zip Code", "Try again later", 1);
+                               }else{
+                                 if(_emailController.text==""){
+                       quickAlertWrong(context, "Enter Email", "Try again later", 1);
+                                 }else{ 
+                       Provider.of<BuyPackageController>(context,listen: false).buyPackageWithoutVoucherProvider(
                           context,
                           int.parse("${widget.package_id}"),
                           int.parse("${widget.subscription_structure_id}"),
@@ -142,6 +169,17 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
                           _emailController.text,
                           ""
                       );
+                                 }
+                               }
+                             }
+                           }
+                        }
+                      } 
+                    }
+                 }
+                      
+                    
+                      
                     }, text: "Next", button_text_fontSize: 15,
                         button_height: 50)
                   ],
