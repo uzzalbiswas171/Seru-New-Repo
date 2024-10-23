@@ -38,6 +38,8 @@ class CustomHttp{
       GetStorage().write("Api_token",r["api_token"]);
       Navigator.push(context, MaterialPageRoute(builder: (context) => BttotomBarScreen(index: 0,),));
       quickAlertsuccess(context, "Login Successful", "Thank you", 2);
+    }else{
+      quickAlertWrong(context, "Invalid User or Password", "Try again later", 2);
     }
   }
 
@@ -80,6 +82,8 @@ class CustomHttp{
    Navigator.push(context, MaterialPageRoute(builder: (context) => BttotomBarScreen(index: 0,),));
       quickAlertsuccess(context, "Registration Successful", "Thanks for Registration", 2);
  //  Navigator.push(context, MaterialPageRoute(builder: (context) =>LoginScreen(),));
+    }else{
+      quickAlertWrong(context, "Your email is invalid", "Please correct email and try again later", 2);
     }
   }
 
