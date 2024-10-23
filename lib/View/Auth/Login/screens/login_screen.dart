@@ -318,21 +318,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 20,
                       ),
                       Center(
-                        child: InkWell(
-                          onTap: () {
-
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              CustomText(text: "Don’t have an account?", fontSize: 15, fontWeight:FontWeight.w400),
-                              InkWell(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen(),));
-                                  },
-                                  child: CustomText(text: "  Sign up here",text_color: redColor ,fontSize: 15, fontWeight:FontWeight.w400,))
-                            ],
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(text: "Don’t have an account?", fontSize: 15, fontWeight:FontWeight.w400),
+                            InkWell(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen(),));
+                                },
+                                child: CustomText(text: "  Sign up here",text_color: redColor ,fontSize: 15, fontWeight:FontWeight.w400,))
+                          ],
                         ),
                       ),
 

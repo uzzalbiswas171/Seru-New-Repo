@@ -65,6 +65,7 @@ class _BttotomBarScreenState extends State<BttotomBarScreen> {
   
   @override
   Widget build(BuildContext context) {
+    print("tokennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn ${GetStorage().read("Api_token")}");
     return  Scaffold(
     key: _scaffoldkey,
     body: WillPopScope(

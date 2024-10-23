@@ -36,8 +36,11 @@ class CustomHttp{
     if (response.statusCode == 200) {
       var r =  jsonDecode(response.body)["data"];
       GetStorage().write("Api_token",r["api_token"]);
+      GetStorage().write("loginemail",r["email"]);
       Navigator.push(context, MaterialPageRoute(builder: (context) => BttotomBarScreen(index: 0,),));
       quickAlertsuccess(context, "Login Successful", "Thank you", 2);
+    }else{
+      quickAlertWrong(context, "Invalid User or Password", "Try again later", 2);
     }
   }
 
@@ -80,6 +83,8 @@ class CustomHttp{
    Navigator.push(context, MaterialPageRoute(builder: (context) => BttotomBarScreen(index: 0,),));
       quickAlertsuccess(context, "Registration Successful", "Thanks for Registration", 2);
  //  Navigator.push(context, MaterialPageRoute(builder: (context) =>LoginScreen(),));
+    }else{
+      quickAlertWrong(context, "Your email is invalid", "Please correct email and try again later", 2);
     }
   }
 
@@ -104,12 +109,12 @@ class CustomHttp{
     try{
       Response response=await http.get(Uri.parse(url), );
       final data=jsonDecode(response.body);
-      // for(int i=0;i<data["data"].length;i++){
-      //   if("${data["data"][i]["active_status"]}" == "Active"){
-      //     getAllPackageList.add(data["data"][i]);
-      //   }
-      // }
-    getAllPackageList=data["data"];
+      for(int i=0;i<data["data"].length;i++){
+        if("${data["data"][i]["active_ststus"]}" == "Yes"){
+          getAllPackageList.add(data["data"][i]);
+        }
+      }
+   // getAllPackageList=data["data"];
 
     }catch(e){
       print("getAllPackageFunction catch error-----------------------------------------> $e");
@@ -161,7 +166,7 @@ class CustomHttp{
       Response response=await http.get(Uri.parse(url), );
       final data=jsonDecode(response.body);
       getAllMySubscriptionList=data["data"];
-
+    //  print("My subscription----------------------------------------------- $getAllMySubscriptionList");
     }catch(e){
       print("getAllMySubscriptionList catch error > $e");
     }
@@ -294,6 +299,7 @@ class CustomHttp{
         },
       );
       var data=jsonDecode(response.body);
+      print("bhyyyyyyyyyyyyyyyyyyyyyyyeeeeeeeeeeeeeeeeeee ${response.body}");
       buyPackageWithoutVouche=data;
          print("pppppppppppppppppppppppppppppppppppppppppppp buyyyyyyyyyyyyyyyyyyyyyyy apiiiiiiiiiiiiiii  ${data.toString().replaceAll("}","").split("pay_url: ")[1]}");
        Navigator.push(context, MaterialPageRoute(builder: (context) => StripePaymentScreen(

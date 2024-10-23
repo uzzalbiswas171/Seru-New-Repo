@@ -167,7 +167,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       CustomButton(
                           onTap: () {
-                            if(password.text==cpassword.text){
+                            if(name.text==""){
+                              quickAlertWrong(context, "Enter Your name", "Please try again later", 2);
+                            }
+                            else{
+                              if(email.text==""){
+                              quickAlertWrong(context, "Enter Your Email", "Please try again later", 2);
+                              }else{
+                                 if(password.text==cpassword.text){
                               Provider.of<RegistrationController>(context,listen: false).getRegistrationInfoProvider(
                                   "${name.text}",
                                   "${surname.text}",
@@ -183,6 +190,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }else{
                               quickAlertWrong(context, "Warning", "Password doesn't match", 2);
                             }
+                              }
+                            }
+                           
 
 
 

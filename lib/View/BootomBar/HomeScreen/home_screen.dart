@@ -176,273 +176,161 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
-                          mainAxisExtent: 145),
+                          mainAxisExtent: 155),
                       itemBuilder: (context, index) {
                         return Card(
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: listColors[index % listColors.length],
+                            //   color: listColors[index % listColors.length],
+                               color: defaultBackgroundColor
                             ),
                             height: 70,
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(left: 8.0,right: 8,top: 8),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    //   CustomText(text: "Package: ${value.getAllPackageList[index]["subscription_structure_id"]??0}",text_color: main_text_blac_color ,fontSize: 12, fontWeight: FontWeight.w500),
-                                    Spacer(),
-                                    Container(
-                                      height: 25,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          gradient: customBackground()),
-                                      alignment: Alignment.center,
-                                      child: CustomText(
-                                          text:
-                                              "\£ ${value.getAllPackageList[index]["amount"] ?? value.getAllPackageList[index]["price"]}",
-                                          text_color: main_text_white_color,
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ],
-                                ),
                                 SizedBox(
                                   height: 5,
                                 ),
+                                Center(
+                                  child: CustomText(maxLines: 1, text: " ${value.getAllPackageList[index]["title"] ?? "0"}",
+                                      fontSize: 14, fontWeight: FontWeight.w500),
+                                ),
+                                CustomText(maxLines: 1, text: "Details : ${value.getAllPackageList[index]["subscription_structures"][0]['access_keywords'] ?? ""}",
+                                    fontSize: 13, fontWeight: FontWeight.w500,overflow: TextOverflow.ellipsis,),
+
                                 CustomText(
-                                    maxLines: 2,
-                                    text:
-                                        "${value.getAllPackageList[index]["title"] ?? "0"}",
+                                    text: "Price : \£ ${value.getAllPackageList[index]["amount"] ?? value.getAllPackageList[index]["price"]}",
+                                    text_color: main_text_blac_color,
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w500)
-                                // ,
+                                    fontWeight: FontWeight.w500),
+
                                 // SizedBox(height: 5,),
-                                // CustomText(text: "Package ${value.getAllPackageList[index]["subscription_structure_id"]??"0"}", fontSize: 16, fontWeight: FontWeight.w500)
-                                ,
-                                SizedBox(
-                                  height: 5,
-                                ),
                                 InkWell(
                                   onTap: () {
                                     "${GetStorage().read("Api_token")}" == "" ||
                                             "${GetStorage().read("Api_token")}" ==
                                                 "null"
-                                        ? Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LoginScreen(),
-                                            ))
-                                        : showDialog(
-                                            context: context,
-                                            builder: (context) {
+                                        ? Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),))
+                                        : showDialog(context: context, builder: (context) {
                                               return StatefulBuilder(
                                                 builder: (context, setState) {
                                                   return AlertDialog(
                                                     title: CustomText(
-                                                        text:
-                                                            "For who do you want to buy ?..",
+                                                        text: " ${value.getAllPackageList[index]["title"] ?? "0"}",
                                                         fontSize: 18,
-                                                        fontWeight:
-                                                            FontWeight.w600),
+                                                        fontWeight: FontWeight.w600),
                                                     content: Container(
-                                                      height: is_cliced == true
-                                                          ? 400
-                                                          : 60,
+                                                      height: is_cliced == true ? 240 : 90,
                                                       child: SingleChildScrollView(
                                                         child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          mainAxisAlignment: MainAxisAlignment.center,
                                                           children: [
+
                                                             Container(
-                                                              padding: EdgeInsets.only(left: 10,right: 10),
+                                                              decoration: BoxDecoration(
+                                                                borderRadius: BorderRadius.circular(11),
+                                                                border: Border.all(width: 1.5,color: Main_Theme_blac.withOpacity(0.2))
+                                                              ),
+                                                              padding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                                                              child: CustomText(text: "${value.getAllPackageList[index]["subscription_structures"][0]['access_keywords'] ?? ""}", fontSize: 13, fontWeight: FontWeight.w400),
+                                                            ),
+
+                                                            Container(
                                                               height: 60,
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.85,
+                                                              width: MediaQuery.of(context).size.width * 0.85,
                                                               child: Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceBetween,
+                                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                                 children: [
                                                                   ElevatedButton(
                                                                       style: ElevatedButton.styleFrom(
-                                                                          backgroundColor: is_cliced_for_own ==
-                                                                                  "FOR GIFT"
-                                                                              ? BootomBarColor
-                                                                              : Colors
-                                                                                  .white),
-                                                                      onPressed:
-                                                                          () {
-                                                                        setState(
-                                                                          () {
-                                                                            is_cliced_for_own =
-                                                                                "FOR GIFT";
-                                                                            is_cliced =
-                                                                                true;
+                                                                          backgroundColor: is_cliced_for_own == "FOR GIFT" ? BootomBarColor : Colors.white),
+                                                                      onPressed: () {
+                                                                        setState(() {
+                                                                            is_cliced_for_own = "FOR GIFT";
+                                                                            is_cliced = true;
                                                                           },
                                                                         );
                                                                       },
                                                                       child: CustomText(
-                                                                          text:
-                                                                              "FOR GIFT",
-                                                                          fontSize: h <
-                                                                                  700
-                                                                              ? 10
-                                                                              : 12,
-                                                                          fontWeight:
-                                                                              FontWeight.w500)),
+                                                                          text: "FOR GIFT", fontSize: h < 700 ? 10 : 12,
+                                                                          fontWeight: FontWeight.w500)),
                                                                   ElevatedButton(
                                                                       style: ElevatedButton.styleFrom(
-                                                                          backgroundColor: is_cliced_for_own ==
-                                                                                  "FOR OWN"
-                                                                              ? BootomBarColor
-                                                                              : Colors
-                                                                                  .white),
-                                                                      onPressed:
-                                                                          () {
-                                                                        setState(
-                                                                          () {
-                                                                            is_cliced_for_own =
-                                                                                "FOR OWN";
-                                                                            is_cliced =
-                                                                                true;
-                                                                          },
+                                                                          backgroundColor: is_cliced_for_own =="FOR OWN"? BootomBarColor: Colors.white),
+                                                                      onPressed:() {
+                                                                            setState(() {is_cliced_for_own ="FOR OWN";is_cliced =true;},
                                                                         );
                                                                       },
                                                                       child: CustomText(
-                                                                          text:
-                                                                              "FOR OWN",
-                                                                          fontSize: h <
-                                                                                  700
-                                                                              ? 10
-                                                                              : 12,
-                                                                          fontWeight:
-                                                                              FontWeight.w500)),
+                                                                          text: "FOR OWN",
+                                                                          fontSize: h <  700 ? 10 : 12,
+                                                                          fontWeight:FontWeight.w500)),
                                                                 ],
                                                               ),
                                                             ),
                                                             is_cliced == false
-                                                                ? Container()
-                                                                : SizedBox(
-                                                                    height: 20,
-                                                                  ),
+                                                                ? Container(): SizedBox( height: 10,),
                                                             is_cliced == false
                                                                 ? Container()
                                                                 : Container(
-                                                                    height: 60,
-                                                                    width: MediaQuery.of(
-                                                                                context)
-                                                                            .size
-                                                                            .width *
-                                                                        0.8,
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .center,
-                                                                      children: [
-                                                                        GestureDetector(
-                                                                            onTap:
-                                                                                () {
-                                                                              Navigator.push(
-                                                                                  context,
-                                                                                  MaterialPageRoute(
-                                                                                    builder: (context) => RegistrationForBuyScreen(
-                                                                                      package_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
-                                                                                      subscription_structure_id: "${value.getAllPackageList[index]["subscription_structures"][0]["subscription_structure_id"] ?? "0"}",
-                                                                                      is_cliced_for_own: is_cliced_for_own,
-                                                                                    ),
-                                                                                  ));
-                                                                            },
-                                                                            child:
-                                                                                Container(
-                                                                              height:
-                                                                                  47,
-                                                                              width:
-                                                                                  235,
-                                                                              decoration:
-                                                                                  BoxDecoration(
-                                                                                borderRadius: BorderRadius.circular(40),
-                                                                                color: Colors.black,
+                                                                    height: 47,
+                                                                    width: MediaQuery.of(context).size.width * 0.8,
+                                                                    child: GestureDetector(
+                                                                        onTap:() {
+                                                                          Navigator.push(context,MaterialPageRoute(builder: (context) => RegistrationForBuyScreen(
+                                                                                  package_id: "${value.getAllPackageList[index]["subscription_structure_id"] ?? "0"}",
+                                                                                  subscription_structure_id: "${value.getAllPackageList[index]["subscription_structures"][0]["subscription_structure_id"] ?? "0"}",
+                                                                                  is_cliced_for_own: is_cliced_for_own,
+                                                                                ),
+                                                                              ));
+                                                                        },
+                                                                        child:  Container( 
+                                                                          height:47,
+                                                                          width: 235,
+                                                                          decoration:BoxDecoration(
+                                                                            borderRadius: BorderRadius.circular(40),
+                                                                            color: Colors.black,
+                                                                          ),
+                                                                          padding: EdgeInsets.only(left: 30, right: 20),
+                                                                          child: Row(
+                                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                            children: [
+                                                                              Text(
+                                                                                "Buy with ",
+                                                                                style: GoogleFonts.roboto(letterSpacing: 0.3, fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.95)),
                                                                               ),
-                                                                              padding:
-                                                                                  EdgeInsets.only(left: 30, right: 20),
-                                                                              child:
-                                                                                  Row(
-                                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    "Buy with ",
-                                                                                    style: GoogleFonts.roboto(letterSpacing: 0.3, fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.95)),
-                                                                                  ),
-                                                                                  CustomImageSection(image: AssetImage("assets/PymentImage/mastercad.PNG"), img_height: 90, img_width: 50, img_margin: 10, Img_radius: 11),
-                                                                                ],
-                                                                              ),
-                                                                            )),
-                                                                      ],
-                                                                    ),
+                                                                              CustomImageSection(image: AssetImage("assets/PymentImage/mastercad.PNG"), img_height: 90, img_width: 50, img_margin: 10, Img_radius: 11),
+                                                                            ],
+                                                                          ),
+                                                                        )),
                                                                   ),
-                                                            FutureBuilder<
-                                                                    PaymentConfiguration>(
-                                                                future:
-                                                                    _googlePayConfigFuture,
-                                                                builder: (context,
-                                                                        snapshot) =>
-                                                                    snapshot
-                                                                            .hasData
-                                                                        ? GooglePayButton(
-                                                                            width:
-                                                                                235,
-                                                                            paymentConfiguration:
-                                                                                snapshot.data!,
-                                                                            paymentItems:
-                                                                                _paymentItems,
-                                                                            type:
-                                                                                GooglePayButtonType.buy,
-                                                                            margin: const EdgeInsets
-                                                                                .only(
-                                                                                top: 15.0),
-                                                                            onPaymentResult:
-                                                                                onGooglePayResult,
-                                                                            loadingIndicator:
-                                                                                const Center(
-                                                                              child:
-                                                                                  CircularProgressIndicator(),
+                                                            FutureBuilder<PaymentConfiguration>(
+                                                                future: _googlePayConfigFuture,
+                                                                builder: (context, snapshot) => snapshot.hasData ? GooglePayButton(
+                                                                            width: MediaQuery.of(context).size.width * 0.8,
+                                                                            paymentConfiguration: snapshot.data!,
+                                                                            paymentItems: _paymentItems,
+                                                                            type: GooglePayButtonType.buy,
+                                                                            margin: const EdgeInsets.only(top: 15.0),
+                                                                            onPaymentResult: onGooglePayResult,
+                                                                            loadingIndicator: const Center(
+                                                                              child: CircularProgressIndicator(),
                                                                             ),
                                                                           )
                                                                         : const SizedBox
                                                                             .shrink()),
                                                             ApplePayButton(
-                                                              paymentConfiguration:
-                                                                  PaymentConfiguration
-                                                                      .fromJsonString(
-                                                                          payment_configurations
-                                                                              .defaultApplePay),
-                                                              paymentItems:
-                                                                  _paymentItems,
-                                                              style:
-                                                                  ApplePayButtonStyle
-                                                                      .black,
-                                                              type:
-                                                                  ApplePayButtonType
-                                                                      .buy,
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      top: 15.0),
-                                                              onPaymentResult:
-                                                                  onApplePayResult,
-                                                              loadingIndicator:
-                                                                  const Center(
-                                                                child:
-                                                                    CircularProgressIndicator(),
-                                                              ),
+                                                              paymentConfiguration:PaymentConfiguration.fromJsonString(payment_configurations.defaultApplePay),
+                                                              paymentItems:_paymentItems,
+                                                              style: ApplePayButtonStyle.black,
+                                                              type: ApplePayButtonType.buy,
+                                                              margin: const EdgeInsets.only(top: 15.0),
+                                                              onPaymentResult: onApplePayResult,
+                                                              loadingIndicator: const Center(child: CircularProgressIndicator(),),
                                                             ),
                                                           ],
                                                         ),
@@ -455,7 +343,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           );
                                   },
                                   child: Card(
-                                    elevation: 9,
+                                    elevation: 2,
                                     child: Container(
                                       height: 26,
                                       width: double.infinity,
@@ -472,10 +360,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
-                                  // child: CircleAvatar(
-                                  //    radius: 30,
-                                  //    backgroundImage: AssetImage("assets/Gif/buynowcircle.gif"),
-                                  //  ),
                                 ),
                                 // Image.asset("assets/Gif/buynow.webp",height: 40,width: 100,fit: BoxFit.fill,)
                               ],
