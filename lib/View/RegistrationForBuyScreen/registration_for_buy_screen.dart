@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:seru_test_project/CustomWidget/CustomButton/custom_button.dart';
@@ -41,6 +42,7 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
   void initState() {
      _cityController.text="London";
      _countryController.text="UK";
+     _emailController.text="${GetStorage().read("loginemail")}";
      // TODO: implement initState
     super.initState();
   }
@@ -57,17 +59,17 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: h*0.025,),
-              /// Apply Sections
-              CustomApplyVaucherSection(applyCuponController: _applyCuponController,onTap: () {
-                Provider.of<BuyPackageController>(context,listen: false).vautureapplyprovider(
-                  context,
-                  "${_applyCuponController.text}",
-                  "${DateFormat("yyyy-MM-dd").format(DateTime.now())}"
-                );
-              },),
+              // SizedBox(height: h*0.025,),
+              // /// Apply Sections
+              // CustomApplyVaucherSection(applyCuponController: _applyCuponController,onTap: () {
+              //   Provider.of<BuyPackageController>(context,listen: false).vautureapplyprovider(
+              //     context,
+              //     "${_applyCuponController.text}",
+              //     "${DateFormat("yyyy-MM-dd").format(DateTime.now())}"
+              //   );
+              // },),
               
-           widget.is_cliced_for_own=="FOR OWN"?Container():  SizedBox(height: 15,),
+           widget.is_cliced_for_own=="FOR OWN"?Container():  SizedBox(height: 0,),
             widget.is_cliced_for_own=="FOR OWN"?Container():  Container(
                 height: 120,
                 width: double.infinity,
@@ -89,10 +91,10 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
                 ),
               ) ,
           
-              SizedBox(height: 5,),
+              SizedBox(height: 0,),
               Container(
                 width: double.infinity,
-                margin: EdgeInsets.all(10),
+                margin: EdgeInsets.only(left: 10,right: 10,bottom: 10),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius:BorderRadius.circular(11),
@@ -124,7 +126,7 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
                     CustomTExtFromField( controller: _zipController, hintText: "Zip Postal Code*", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
           
                     SizedBox(height: 15,),
-                    CustomTExtFromField(controller: _emailController, hintText: "Email*", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
+                    CustomTExtFromFieldforreadonly(readOnly: true,controller: _emailController, hintText: "Email*", text: "Email", fontSize: 15, fontWeight: FontWeight.w500, text_color: main_text_blac_color.withOpacity(0.8), suffixIcon: Icon(Icons.person,color: main_text_blac_color.withOpacity(0.6),), obscureText: false,),
                     SizedBox(height: 15,),
                     CustomButton(onTap: () {
                       if(_nameController.text==""){
@@ -150,26 +152,22 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
                               if(_zipController.text==""){
                        quickAlertWrong(context, "Enter Zip Code", "Try again later", 1);
                                }else{
-                                 if(_emailController.text==""){
-                       quickAlertWrong(context, "Enter Email", "Try again later", 1);
-                                 }else{ 
-                       Provider.of<BuyPackageController>(context,listen: false).buyPackageWithoutVoucherProvider(
-                          context,
-                          int.parse("${widget.package_id}"),
-                          int.parse("${widget.subscription_structure_id}"),
-                          "no",
-                          _friendemailController.text,
-                          _nameController.text,
-                          _surnameController.text,
-                          _address1Controller.text,
-                          _address2Controller.text,
-                          _cityController.text,
-                          _countryController.text,
-                          _zipController.text,
-                          _emailController.text,
-                          ""
-                      );
-                                 }
+                                Provider.of<BuyPackageController>(context,listen: false).buyPackageWithoutVoucherProvider(
+                                    context,
+                                    int.parse("${widget.package_id}"),
+                                    int.parse("${widget.subscription_structure_id}"),
+                                    "no",
+                                    _friendemailController.text,
+                                    _nameController.text,
+                                    _surnameController.text,
+                                    _address1Controller.text,
+                                    _address2Controller.text,
+                                    _cityController.text,
+                                    _countryController.text,
+                                    _zipController.text,
+                                    "${GetStorage().read("loginemail")}",
+                                    ""
+                                );
                                }
                              }
                            }

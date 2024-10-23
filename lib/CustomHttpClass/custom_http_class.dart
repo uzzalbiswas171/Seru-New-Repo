@@ -36,6 +36,7 @@ class CustomHttp{
     if (response.statusCode == 200) {
       var r =  jsonDecode(response.body)["data"];
       GetStorage().write("Api_token",r["api_token"]);
+      GetStorage().write("loginemail",r["email"]);
       Navigator.push(context, MaterialPageRoute(builder: (context) => BttotomBarScreen(index: 0,),));
       quickAlertsuccess(context, "Login Successful", "Thank you", 2);
     }else{
@@ -298,6 +299,7 @@ class CustomHttp{
         },
       );
       var data=jsonDecode(response.body);
+      print("bhyyyyyyyyyyyyyyyyyyyyyyyeeeeeeeeeeeeeeeeeee ${response.body}");
       buyPackageWithoutVouche=data;
          print("pppppppppppppppppppppppppppppppppppppppppppp buyyyyyyyyyyyyyyyyyyyyyyy apiiiiiiiiiiiiiii  ${data.toString().replaceAll("}","").split("pay_url: ")[1]}");
        Navigator.push(context, MaterialPageRoute(builder: (context) => StripePaymentScreen(
