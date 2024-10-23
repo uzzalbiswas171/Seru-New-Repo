@@ -161,7 +161,7 @@ class CustomHttp{
       Response response=await http.get(Uri.parse(url), );
       final data=jsonDecode(response.body);
       getAllMySubscriptionList=data["data"];
-
+    //  print("My subscription----------------------------------------------- $getAllMySubscriptionList");
     }catch(e){
       print("getAllMySubscriptionList catch error > $e");
     }

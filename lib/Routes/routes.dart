@@ -39,7 +39,7 @@ String MOCKTEST ="api/protected/mocktest";
 
 
 /// Subscription
-String MYSUBSCRIPTION ="api/subscriptions";
+String MYSUBSCRIPTION ="api/protected/subscriptions";
 
 
 /// Subscription
@@ -65,6 +65,10 @@ String BuyPackageWithoutVoucher ="api/protected/buy-package";
 
 /// Get all vdeo
 String GETVDOECLASS ="api/videos";
+
+
+/// Get My subscription
+String Protectedsubscriptions ="api/protected/subscriptions";
 
 
 
