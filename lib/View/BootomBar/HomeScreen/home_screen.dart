@@ -198,6 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: CustomText(maxLines: 1, text: " ${value.getAllPackageList[index]["title"] ?? "0"}",
                                       fontSize: 14, fontWeight: FontWeight.w500),
                                 ),
+                                Divider(),
                                 CustomText(maxLines: 1, text: "Details : ${value.getAllPackageList[index]["subscription_structures"][0]['access_keywords'] ?? ""}",
                                     fontSize: 13, fontWeight: FontWeight.w500,overflow: TextOverflow.ellipsis,),
 

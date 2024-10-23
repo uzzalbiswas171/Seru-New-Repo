@@ -69,7 +69,7 @@ class _RegistrationForBuyScreenState extends State<RegistrationForBuyScreen> {
               //   );
               // },),
               
-           widget.is_cliced_for_own=="FOR OWN"?Container():  SizedBox(height: 0,),
+           widget.is_cliced_for_own=="FOR OWN"?Container():  SizedBox(height: 10,),
             widget.is_cliced_for_own=="FOR OWN"?Container():  Container(
                 height: 120,
                 width: double.infinity,
