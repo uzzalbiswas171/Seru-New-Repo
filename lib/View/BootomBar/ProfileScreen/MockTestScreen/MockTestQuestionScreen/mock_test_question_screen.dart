@@ -29,11 +29,29 @@ class _MockTestQuestionScreenState extends State<MockTestQuestionScreen> {
     super.initState();
     // Don't initialize `selectedIndexes` here, do it when data is available in the build method.
   }
+  int count =0;
+  int count2 =0;
+  int count3 =0;
+  int count4 =0;
+  String firstString="";
+  String secondString="";
+  String thiredString="";
+  String LastPart="";
 
   @override
   Widget build(BuildContext context) {
+    // count=0;
+    // count2=0;
+    // count3=0;
+    // count4=0;
+    // int qusetion=1;
+    // firstString ="";
+    // secondString ="";
+    // thiredString ="";
+    // LastPart ="";
     // Fetch the data from the provider
     final data = Provider.of<ProfileController>(context).MOCID_WISE_QUESTION_LIST_GET;
+     print("dddddddddddd===========> $data");
 
     // Ensure data is not null or empty before initializing `selectedIndexes`
     if (data != null && selectedIndexes.isEmpty) {
@@ -95,6 +113,29 @@ class _MockTestQuestionScreenState extends State<MockTestQuestionScreen> {
               itemBuilder: (context, index) {
                 double question_textfont_size=15.0;
                 double question_title_textfont_size=16.0;
+
+                for(int i=0;i<data[index]["question_description"].length;i++){
+                  if(data[index]["question_description"][i]=="["){
+                    count++;
+                    if(count==1)
+                    {
+                      count2=i;
+                      firstString="${data[index]["question_description"].toString().substring(0,i)}";
+                      LastPart=data[index]["question_description"].toString().substring( i+7,data[index]["question_description"].length);
+                    }
+                    else if(count==2){
+                      count3=i;
+                      secondString="${data[index]["question_description"].toString().substring(count2+7,i)}";
+                      LastPart=data[index]["question_description"].toString().substring( i+7,data[index]["question_description"].length);
+                    }
+                    else if(count==3){
+                      thiredString=data[index]["question_description"].toString().substring(count3+7,i);
+                      LastPart=data[index]["question_description"].toString().substring( i+7,data[index]["question_description"].length);
+                    }
+                    else{}
+                  }
+                }
+
                 return Card(
                   color: Colors.white,
                   elevation: 5,
@@ -109,6 +150,7 @@ class _MockTestQuestionScreenState extends State<MockTestQuestionScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+
                         CustomText(
                             text:
                             "Q${index + 1} . ${Bidi.stripHtmlIfNeeded("${data[index]["question_description"] ?? ""}").replaceAll("\n", " ")} ",

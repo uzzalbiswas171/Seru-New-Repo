@@ -81,6 +81,7 @@ class _BttotomBarScreenState extends State<BttotomBarScreen> {
         topLeft: Radius.circular(11),
         topRight: Radius.circular(11)
       ),
+
    //   gradient: customBackground()
      color: Main_Theme_white
      ),
